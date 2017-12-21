@@ -1,0 +1,21 @@
+{
+    "name": "fernando/microframework",
+    "description": "Projeto de aprendizado das melhores práticas",
+    "authors": [
+        {
+            "name": "Fernando Felício",
+            "email": "fernando_felicio82@yahoo.com.br"
+        }
+    ],
+    "require": {
+        "illuminate/support": "^5.5"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Microframework\\": "src"
+        }
+    }
+}
