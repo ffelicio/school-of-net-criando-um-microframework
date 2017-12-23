@@ -13,10 +13,7 @@ $app->get('/hello/{name}', function($params) {
     return $params;
 });
 
-$app->get('/teste/{id}', function($params) {
-    $controller = new Microframework\Controllers\TesteController();
-    return $controller->teste((int)$params[1]);
-});
+$app->get('/teste/{id}', 'Microframework\Controllers\TesteController@teste');
 
 $app->get('/teste2/{id}/nome/{nome}', function($params) {
     $controller = new Microframework\Controllers\TesteController();

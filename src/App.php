@@ -34,13 +34,27 @@ class App
         $this->router->get($path, $closure);
     }
 
+    protected function resolveController(array $route)
+    {
+        $controllerAction = explode('@', $route['callback']);
+        if (count($controllerAction) !== 2) {
+            throw new \Exception('Invalid controller and action');
+        }
+        $resolver = new Resolver;
+        $controller = $resolver->class($controllerAction[0], ['params' => $route['params']]);
+        $action = $controllerAction[1];
+        return $controller->$action();
+    }
+
     public function run()
     {
         $route = $this->router->run();
-        $resolver = new Resolver();
-
-        $data = $resolver->method($route['callback'], ['params' => $route['params']]);
-
+        $resolver = new Resolver;
+        if (is_string($route['callback'])) {
+            $data = $this->resolveController($route);
+        } else {
+            $data = $resolver->method($route['callback'], ['params' => $route['params']]);
+        }
         $this->renderer->setData($data);
         $this->renderer->run();
     }

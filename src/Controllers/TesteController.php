@@ -4,8 +4,16 @@ namespace Microframework\Controllers;
 
 class TesteController
 {
-    public function teste($id)
+    private $params;
+
+    public function __construct($params)
     {
+        $this->params = $params;
+    }
+
+    public function teste()
+    {
+        $id = (int)($this->params[1]);
         return require(__DIR__ . '/../../resources/teste.phtml');
     }
 
